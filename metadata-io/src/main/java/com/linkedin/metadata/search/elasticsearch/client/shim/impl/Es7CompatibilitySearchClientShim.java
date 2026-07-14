@@ -78,7 +78,7 @@ public class Es7CompatibilitySearchClientShim extends OpenSearch2SearchClientShi
         return true;
       case "point_in_time":
         // PIT is available in ES 7.10+ and OpenSearch 2.0+
-        return getEngineType() == SearchEngineType.OPENSEARCH_2
+        return getEngineType().isOpenSearch()
             || getEngineType() == SearchEngineType.ELASTICSEARCH_7;
       case "async_search":
         // Async search is ES-specific

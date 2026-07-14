@@ -133,7 +133,7 @@ public class OpenSearch2SearchClientShim extends AbstractBulkProcessorShim<BulkP
 
   @Getter private final ShimConfiguration shimConfiguration;
   private final RestHighLevelClient client;
-  private final ObjectMapper objectMapper;
+  protected final ObjectMapper objectMapper;
   protected SearchEngineType engineType;
 
   public OpenSearch2SearchClientShim(@Nonnull ShimConfiguration config) throws IOException {
