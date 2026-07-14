@@ -150,7 +150,7 @@ public class OpenSearch2SearchClientShim extends AbstractBulkProcessorShim<BulkP
     return new OpenSearch2SearchClientShim(client, new ObjectMapper());
   }
 
-  private OpenSearch2SearchClientShim(RestHighLevelClient client, ObjectMapper objectMapper) {
+  protected OpenSearch2SearchClientShim(RestHighLevelClient client, ObjectMapper objectMapper) {
     this.shimConfiguration = null;
     this.engineType = SearchEngineType.OPENSEARCH_2;
     this.client = client;

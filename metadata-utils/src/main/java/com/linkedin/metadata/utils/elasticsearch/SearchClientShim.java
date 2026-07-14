@@ -75,8 +75,8 @@ import org.opensearch.index.reindex.UpdateByQueryRequest;
 
 /**
  * Shim interface that abstracts different Elasticsearch/OpenSearch client implementations. This
- * allows DataHub to support ES 7.17 (with API compatibility), ES 8.x, ES 9.x and OpenSearch 2.x.,
- * through a common interface.
+ * allows DataHub to support ES 7.17 (with API compatibility), ES 8.x, ES 9.x, OpenSearch 2.x, and
+ * OpenSearch 3.x through a common interface.
  */
 public interface SearchClientShim<T> extends Closeable, IndexSettingsComparison {
 
@@ -86,6 +86,7 @@ public interface SearchClientShim<T> extends Closeable, IndexSettingsComparison 
     ELASTICSEARCH_8("elasticsearch", "8"),
     ELASTICSEARCH_9("elasticsearch", "9"),
     OPENSEARCH_2("opensearch", "2"),
+    OPENSEARCH_3("opensearch", "3"),
     UNKNOWN("unsupported", "none");
 
     private final String engine;
@@ -114,7 +115,7 @@ public interface SearchClientShim<T> extends Closeable, IndexSettingsComparison 
 
     /** Determine if this engine type supports the ES 7.x REST high-level client */
     public boolean supportsEs7HighLevelClient() {
-      return this == ELASTICSEARCH_7 || this == OPENSEARCH_2;
+      return this == ELASTICSEARCH_7 || this == OPENSEARCH_2 || this == OPENSEARCH_3;
     }
 
     /** Determine if this engine type requires the new ES 8.x Java client */
@@ -122,9 +123,12 @@ public interface SearchClientShim<T> extends Closeable, IndexSettingsComparison 
       return this == ELASTICSEARCH_8 || this == ELASTICSEARCH_9;
     }
 
-    /** Determine if this engine type requires OpenSearch specific client */
+    /**
+     * Determine if this engine type requires the OpenSearch Java client ({@code opensearch-java}).
+     * Currently false for OPENSEARCH_3 while B1 uses HLRC; set true when B2 lands.
+     */
     public boolean requiresOpenSearchClient() {
-      return false; // OpenSearch 3.x support not yet implemented
+      return false;
     }
   }
 

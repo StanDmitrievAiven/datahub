@@ -197,11 +197,14 @@ public class SearchClientShimFactory {
       case "OPENSEARCH_2":
       case "OS2":
         return SearchClientShim.SearchEngineType.OPENSEARCH_2;
+      case "OPENSEARCH_3":
+      case "OS3":
+        return SearchClientShim.SearchEngineType.OPENSEARCH_3;
       default:
         throw new IllegalArgumentException(
             "Unsupported engine type: "
                 + engineTypeStr
-                + ". Supported types: ELASTICSEARCH_7, ELASTICSEARCH_8, ELASTICSEARCH_9, OPENSEARCH_2");
+                + ". Supported types: ELASTICSEARCH_7, ELASTICSEARCH_8, ELASTICSEARCH_9, OPENSEARCH_2, OPENSEARCH_3");
     }
   }
 }
